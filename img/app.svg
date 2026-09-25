@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+    <!-- Hintere Datei -->
+    <path fill="currentColor" opacity="0.35" d="M5 2c-1.1 0-2 .9-2 2v12h2V4h10V2H5z"/>
+    <!-- Mittlere Datei -->
+    <path fill="currentColor" opacity="0.6" d="M8 5c-1.1 0-2 .9-2 2v12h2V7h10V5H8z"/>
+    <!-- Vorderste Datei -->
+    <path fill="currentColor" d="M11 8c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h9c1.1 0 2-.9 2-2v-7l-5-5h-6zm6 1.5l3.5 3.5H17V9.5z"/>
+    <!-- Umbenennen-/Cursor-Linie -->
+    <path fill="currentColor" d="M12 17h5v1.5h-5V17z"/>
+</svg>

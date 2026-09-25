@@ -198,4 +198,67 @@ class RenameController extends Controller {
         $sanitized = preg_replace('/-+/', '-', $sanitized);
         return trim($sanitized, " .-_\t\n\r\0\x0B");
     }
+
+    #[NoAdminRequired]
+    public function undo(array $items): DataResponse {
+        $user = $this->userSession->getUser();
+        if (!$user) {
+            return new DataResponse(['error' => 'Nicht autorisiert.'], 401);
+        }
+
+        if (empty($items)) {
+            return new DataResponse(['error' => 'Keine Daten zum Zurücksetzen vorhanden.'], 400);
+        }
+
+        $userFolder = $this->rootFolder->getUserFolder($user->getUID());
+        $revertedCount = 0;
+
+        foreach ($items as $item) {
+            $fileId = $item['id'] ?? null;
+            $oldName = $item['oldName'] ?? null;
+            $newName = $item['newName'] ?? null;
+            $path = $item['path'] ?? null;
+
+            if (!$oldName) {
+                continue;
+            }
+
+            $node = null;
+
+            // 1. Versuch: Über eindeutige Nextcloud File-ID finden
+            if ($fileId && is_numeric($fileId) && (int)$fileId > 0) {
+                try {
+                    $nodes = $userFolder->getById((int)$fileId);
+                    if (!empty($nodes)) {
+                        $node = $nodes[0];
+                    }
+                } catch (\Throwable $t) {}
+            }
+
+            // 2. Fallback: Über Pfad/Neuen Namen im Ordner finden
+            if (!$node && !empty($path)) {
+                try {
+                    $dir = dirname($path);
+                    $targetPath = ($dir === '.' || $dir === '/' || empty($dir)) ? $newName : trim($dir, '/') . '/' . $newName;
+                    $node = $userFolder->get($targetPath);
+                } catch (\Throwable $t) {}
+            }
+
+            // Zurückbenennen auf den alten Namen
+            if ($node) {
+                try {
+                    $parent = $node->getParent();
+                    if ($parent instanceof Folder && !$parent->nodeExists($oldName)) {
+                        $node->move($parent->getPath() . '/' . $oldName);
+                        $revertedCount++;
+                    }
+                } catch (\Throwable $t) {}
+            }
+        }
+
+        return new DataResponse([
+            'success' => true,
+            'reverted' => $revertedCount
+        ]);
+    }
 }

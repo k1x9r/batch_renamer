@@ -1,0 +1,26 @@
+{
+  "translations": {
+    "Batch rename": "Stapel-Umbenennung",
+    "Batch rename selected files": "Ausgewählte Dateien im Stapel umbenennen",
+    "Please select at least two files to rename.": "Bitte mindestens zwei Dateien zum Durchnummerieren auswählen.",
+    "Selected files:": "Ausgewählte Dateien:",
+    "Naming pattern (use # for digits)": "Namensmuster (nutze # für Ziffern)",
+    "e.g. Image_###": "z. B. Bild_###",
+    "Tip: ### = 001, ## = 01, #### = 0001": "Tipp: ### = 001, ## = 01, #### = 0001",
+    "Start number": "Startnummer",
+    "Preview:": "Vorschau:",
+    "The pattern must contain at least one # to number files.": "Das Muster muss mindestens ein # enthalten, damit die Dateien durchnummeriert werden können.",
+    "Renaming files...": "Dateien werden umbenannt...",
+    "Current file:": "Aktuelle Datei:",
+    "Cancel": "Abbrechen",
+    "Rename now": "Jetzt umbenennen",
+    "Renaming...": "Wird umbenannt...",
+    "{count} files renamed successfully!": "{count} Dateien erfolgreich umbenannt!",
+    "Change log:": "Änderungsprotokoll:",
+    "↩ Undo": "↩ Rückgängig machen",
+    "Reverting...": "Wird zurückgesetzt...",
+    "Done": "Fertig",
+    "Error renaming files: ": "Fehler beim Umbenennen: ",
+    "Error reverting changes: ": "Fehler beim Zurücksetzen: "
+  }
+}

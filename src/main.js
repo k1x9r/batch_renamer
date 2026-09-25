@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import RenameModal from './components/RenameModal.vue'
+import { translate as t } from '@nextcloud/l10n'
 
 window.appName = 'batch_renamer'
 window.appVersion = '1.0.0'
@@ -190,11 +191,11 @@ function attachRenameButton() {
 
     const btn = refButton.cloneNode(true)
     btn.id = 'batch-renamer-btn'
-    btn.title = 'Ausgewählte Dateien im Stapel umbenennen'
+    btn.title = t('batch_renamer', 'Batch rename selected files')
 
     const textEl = btn.querySelector('.button-vue__text, span:last-child')
     if (textEl) {
-        textEl.textContent = 'Stapel-Umbenennung'
+        textEl.textContent = t('batch_renamer', 'Batch rename')
     }
 
     const iconEl = btn.querySelector('.button-vue__icon, svg')
@@ -211,7 +212,7 @@ function attachRenameButton() {
         e.stopPropagation()
         const selectedFiles = getSelectedFiles()
         if (selectedFiles.length < 2) {
-            alert('Bitte mindestens zwei Dateien zum Durchnummerieren auswählen.')
+            alert(t('batch_renamer', 'Please select at least two files to rename.'))
             return
         }
         openRenameDialog(selectedFiles)
